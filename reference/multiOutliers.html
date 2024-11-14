@@ -94,8 +94,7 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcars</span>, method<span class="op">=</span><span class="st">"mahalanobis"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"mahalanobis"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘dplyr’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:stats’:</span>
@@ -107,34 +106,40 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: cli</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: mahalanobis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcars</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcarsOutliers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Row: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Message:  No outliers detected</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : Message = No outliers detected</span>
-<span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcars</span>, method<span class="op">=</span><span class="st">"LoF"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row: 5 7 9 10 12 20 31 32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 25.11784 29.58581 27.30969 19.22256 26.99406 21.46034 27.95683 25.39721</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Message:  Outliers detected</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : alpha = 0.1</span>
+<span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"LoF"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: LoF</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcars</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcarsOutliers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Row: 31</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 1.644219</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row: 5 7 9 10 11 12 20 31 32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 2.28365 2.719583 2.560179 1.530304 1.563598 1.804971 1.567824 2.950466 1.574599</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Message:  Outliers detected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : minPts = 10</span>
-<span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcars</span>, method<span class="op">=</span><span class="st">"kNN"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"kNN"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: FNN</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get.knn(data, k, algorithm):</span> Data include NAs</span>
-<span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcars</span>, method<span class="op">=</span><span class="st">"iForest"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Method: kNN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcarsOutliers</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row: 11 19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 547.8248 393.1049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Message:  Outliers detected</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : k = 5</span>
+<span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"iForest"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Due to small sample size, reduced 'min.node.size' to 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: iForest</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcars</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcarsOutliers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Row: 31 9 31</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 3.868148 3.55932 3.472923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row: 7 31 9 5 9 32 12 19 10 11 31 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 5.1838 4.96668 -4.954436 -4.87554 -4.539302 -4.199271 4.192442 3.659128 -3.600141 -3.595072 -3.348599 3.32555</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Message:  Outliers detected</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in x[[i]]:</span> subscript out of bounds</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

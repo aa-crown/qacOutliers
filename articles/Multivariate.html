@@ -72,25 +72,77 @@
 <span><span class="co">#&gt; Warning: replacing previous import 'dbscan::as.dendrogram' by</span></span>
 <span><span class="co">#&gt; 'stats::as.dendrogram' when loading 'qacOutliers'</span></span></code></pre></div>
 <div class="section level2">
+<h2 id="what-are-multivariate-outliers-how-do-you-detect-them">What are multivariate outliers? How do you detect them?<a class="anchor" aria-label="anchor" href="#what-are-multivariate-outliers-how-do-you-detect-them"></a>
+</h2>
+<ul>
+<li>short description of what they are</li>
+<li>we will go into how the four methods work in the rest of the
+vignette</li>
+</ul>
+</div>
+<div class="section level2">
 <h2 id="knn">kNN<a class="anchor" aria-label="anchor" href="#knn"></a>
 </h2>
 <p>kNN calculates the distances between a data point and its k-nearest
-neighbors, snd assigns an outlier score based on that distance. If the
-outlier score is above 0.95, then kNN considers the data point as an
+neighbors, and assigns an outlier score based on that distance. If the
+outlier score isabove 0.95, then kNN considers the data point as an
 outlier.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, method<span class="op">=</span><span class="st">"kNN"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required package: FNN</span></span>
+<span><span class="co">#&gt; Loading required package: cli</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Method: kNN</span></span>
+<span><span class="co">#&gt; Dataset: mtcars</span></span>
+<span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Row: 31</span></span>
+<span><span class="co">#&gt; Outlier Score: 122.3174</span></span>
+<span><span class="co">#&gt; Message:  Outliers detected</span></span>
+<span><span class="co">#&gt; Option 1 : k = 5</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="lof">LoF<a class="anchor" aria-label="anchor" href="#lof"></a>
+<h2 id="local-outlier-factor-lof">Local outlier factor (LoF)<a class="anchor" aria-label="anchor" href="#local-outlier-factor-lof"></a>
 </h2>
-<p>Local Outlier Factor for a point is the average density around the
-k-nearest neighbors of the point divided by the density around the point
-itself. If the LoF score is above 1, it ts more likely to be anomalous,
-if it is below 1, it is less likely to be anomalous.</p>
+<p>LoF for a point is the average density around the k-nearest neighbors
+of the point divided by the density around the point itself. If the LoF
+score is above 1, it ts more likely to be anomalous, if it is below 1,
+it is less likely to be anomalous.</p>
+<p>-describe how this works within our function</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"LoF"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Method: LoF</span></span>
+<span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
+<span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Row: 5 7 9 10 11 12 20 31 32</span></span>
+<span><span class="co">#&gt; Outlier Score: 2.28365 2.719583 2.560179 1.530304 1.563598 1.804971 1.567824 2.950466 1.574599</span></span>
+<span><span class="co">#&gt; Message:  Outliers detected</span></span>
+<span><span class="co">#&gt; Option 1 : minPts = 10</span></span></code></pre></div>
+<p>-how to customize results (change threshold and stuff) -how to
+intrepret results</p>
 </div>
 <div class="section level2">
 <h2 id="mahalanobis">Mahalanobis<a class="anchor" aria-label="anchor" href="#mahalanobis"></a>
 </h2>
 <p>information on the mahalanobis method</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"mahalanobis"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     filter, lag</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Method: mahalanobis</span></span>
+<span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
+<span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Row: 5 7 9 10 12 20 31 32</span></span>
+<span><span class="co">#&gt; Outlier Score: 25.11784 29.58581 27.30969 19.22256 26.99406 21.46034 27.95683 25.39721</span></span>
+<span><span class="co">#&gt; Message:  Outliers detected</span></span>
+<span><span class="co">#&gt; Option 1 : alpha = 0.1</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="iforest">iForest<a class="anchor" aria-label="anchor" href="#iforest"></a>
@@ -102,7 +154,7 @@ it will randomly pick a number in the range of the variable, and if the
 variable is categorical it will randomly pick a level. Then it will
 split the data using the value randomly selected eariler.</p>
 <p>The iForest method repeats the above steps until all points are
-separatly in their own node. Then, for each data point, it counts how
+separately in their own node. Then, for each data point, it counts how
 many splits were needed to isolate it.</p>
 <p>Because the selection of variables and values is random, this process
 will return different results each time. Therefore, isolation trees are
@@ -110,6 +162,16 @@ repeated many times and the results are averaged over all trials. More
 isolated points will have lower average path lengths. They are more
 isolated from the rest of the data’s distribution, therefore they are
 called outliers.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"iForest"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Due to small sample size, reduced 'min.node.size' to 11</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Method: iForest</span></span>
+<span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
+<span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Row: 7 31 9 5 9 32 12 19 10 11 31 5</span></span>
+<span><span class="co">#&gt; Outlier Score: 5.1838 4.96668 -4.954436 -4.87554 -4.539302 -4.199271 4.192442 3.659128 -3.600141 -3.595072 -3.348599 3.32555</span></span>
+<span><span class="co">#&gt; Message:  Outliers detected</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
